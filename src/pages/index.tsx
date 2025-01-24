@@ -1,4 +1,4 @@
-import { ShoeComparator } from '../components/ShoeComparator';
+import ShoeComparator from '../components/ShoeComparator';
 
 export async function getStaticProps() {
   try {
