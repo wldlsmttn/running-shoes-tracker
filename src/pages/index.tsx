@@ -2,23 +2,26 @@ import ShoeComparator from '../components/ShoeComparator';
 
 export async function getStaticProps() {
   try {
-    const { SHOES_DATA } = process.env;
-    const shoes = await SHOES_DATA.kv.get('shoes', { type: 'json' }) || [];
-    const lastUpdate = await SHOES_DATA.kv.get('last_update');
+    const kv = await fetch(`https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/storage/kv/namespaces/${process.env.KV_SHOES_NAMESPACE}/values/shoes`, {
+      headers: {
+        'Authorization': `Bearer ${process.env.CLOUDFLARE_API_TOKEN}`
+      }
+    });
+    
+    const shoes = await kv.json() || [];
 
     return {
       props: {
         shoes,
-        lastUpdate,
+        lastUpdate: new Date().toISOString()
       },
       revalidate: 43200
     };
   } catch (error) {
-    console.error('Error fetching data:', error);
     return {
       props: {
         shoes: [],
-        lastUpdate: null,
+        lastUpdate: null
       },
       revalidate: 43200
     };
