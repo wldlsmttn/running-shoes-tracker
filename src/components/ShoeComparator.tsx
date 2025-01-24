@@ -1,24 +1,12 @@
-import { Shoe } from '../types';
-
 interface Shoe {
   id: string;
-  brand: string; 
+  brand: string;
   model: string;
   purchaseDate: string;
   mileage: number;
   totalDistance: number;
   status: string;
 }
-
-interface ShoeComparatorProps {
-  initialData: Shoe[];
-  lastUpdate: string | null;
-}
-
-const ShoeComparator = ({ initialData, lastUpdate }: ShoeComparatorProps) => {
-  // ...
-};
-
 
 interface ShoeComparatorProps {
   initialData: Shoe[];
