@@ -1,6 +1,8 @@
+import { GetStaticProps } from 'next';
 import ShoeComparator from '../components/ShoeComparator';
+import { Shoe } from '../types';
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const kv = await fetch(`https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/storage/kv/namespaces/${process.env.KV_SHOES_NAMESPACE}/values/shoes_list`, {
       headers: {
@@ -8,7 +10,7 @@ export async function getStaticProps() {
       }
     });
     
-    const shoes = await kv.json() || [];
+    const shoes: Shoe[] = await kv.json() || [];
     return {
       props: {
         shoes,
@@ -25,9 +27,9 @@ export async function getStaticProps() {
       revalidate: 43200
     };
   }
-}
+};
 
-export default function Home({ shoes, lastUpdate }) {
+export default function Home({ shoes, lastUpdate }: { shoes: Shoe[], lastUpdate: string | null }) {
   return (
     <div className="container mx-auto px-4 py-8">
       <ShoeComparator initialData={Array.isArray(shoes) ? shoes : []} lastUpdate={lastUpdate} />
