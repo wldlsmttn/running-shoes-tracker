@@ -1,6 +1,15 @@
 import { GetStaticProps } from 'next';
 import ShoeComparator from '../components/ShoeComparator';
-import { Shoe } from '../types';
+
+interface Shoe {
+  id: string;
+  brand: string;
+  model: string;
+  purchaseDate: string;
+  mileage: number;
+  totalDistance: number;
+  status: string;
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
