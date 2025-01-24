@@ -2,20 +2,28 @@ import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { Search, SortAsc, SortDesc } from 'lucide-react';
 
-const Card = ({ className, ...props }: { className?: string }) => (
- <div className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`} {...props} />
+const Card = ({ className, children, ...props }: { className?: string, children: React.ReactNode }) => (
+  <div className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className || ''}`} {...props}>
+    {children}
+  </div>
 );
 
-const CardHeader = ({ className, ...props }: { className?: string }) => (
- <div className={`flex flex-col space-y-1.5 p-6 ${className}`} {...props} />
+const CardHeader = ({ className, children, ...props }: { className?: string, children: React.ReactNode }) => (
+  <div className={`flex flex-col space-y-1.5 p-6 ${className || ''}`} {...props}>
+    {children}
+  </div>
 );
 
-const CardTitle = ({ className, ...props }: { className?: string }) => (
- <h3 className={`text-2xl font-semibold leading-none tracking-tight ${className}`} {...props} />
+const CardTitle = ({ className, children, ...props }: { className?: string, children: React.ReactNode }) => (
+  <h3 className={`text-2xl font-semibold leading-none tracking-tight ${className || ''}`} {...props}>
+    {children}
+  </h3>
 );
 
-const CardContent = ({ className, ...props }: { className?: string }) => (
- <div className={`p-6 pt-0 ${className}`} {...props} />
+const CardContent = ({ className, children, ...props }: { className?: string, children: React.ReactNode }) => (
+  <div className={`p-6 pt-0 ${className || ''}`} {...props}>
+    {children}
+  </div>
 );
 
 interface StackHeight {
